@@ -97,5 +97,5 @@ server.get('/api/users', (req, res) => {
 })
 
 server.listen(process.env.PORT || 5000, () => {
-  console.log("Server listening on" + (process.env.PORT || 5000))
+  console.log("Server listening on " + (process.env.PORT || 5000))
 })
