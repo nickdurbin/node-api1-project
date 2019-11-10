@@ -87,7 +87,7 @@ server.get('/api/users', (req, res) => {
   }
   database.insert(req.body)
     .then(data => {
-      res.status(200).json({ ...data, ...req.body})
+      res.status(201).json({ ...data, ...req.body})
     })
     .catch(() => {
       return res.status(500).json({
