@@ -39,7 +39,7 @@ server.get('/api/users/:id', (req, res) => {
     })
 })
 
-// DELTE REQUESTS
+// DELETE REQUESTS
 server.delete('/api/users/:id', (req, res) => {
   database.remove(req.params.id)
     .then(data => {
@@ -96,6 +96,9 @@ server.get('/api/users', (req, res) => {
     })
 })
 
-server.listen(process.env.PORT || 5000, () => {
-  console.log("Server listening on " + (process.env.PORT || 5000))
+const port = 8080
+const host = "127.0.0.1" // another way to say "localhost"
+
+server.listen(port, host, () => {
+  console.log(`Server running at http://${host}:${port}`)
 })
