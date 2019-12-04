@@ -79,7 +79,7 @@ server.put('/api/users/:id', (req, res) => {
 })
 
 //CREATE REQUESTS
-server.get('/api/users', (req, res) => {
+server.post('/api/users', (req, res) => {
   if (!req.body.name || !req.body.bio) {
     return res.status(400).json({
       error: "Please provide name and bio of the user."
