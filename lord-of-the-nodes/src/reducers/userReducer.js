@@ -46,7 +46,7 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
           isLoading: false,
-          users: action.payload
+          users: [...state.users, action.payload]
       }
     case POST_USERS_ERROR:
       return {
@@ -62,8 +62,7 @@ export function userReducer(state = initialState, action) {
     case DELETE_USERS_SUCCESS:
       return {
         ...state,
-          isLoading: false,
-          users: action.payload
+        isLoading: false,
       }
     case DELETE_USERS_ERROR:
       return {
@@ -80,7 +79,7 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
           isLoading: false,
-          users: action.payload
+          users: [...state.users, action.payload]
       }
     case PUT_USERS_ERROR:
       return {

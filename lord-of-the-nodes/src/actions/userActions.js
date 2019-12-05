@@ -45,7 +45,7 @@ export function deleteUser(id) {
     axios
       .delete(`http://127.0.0.1:8080/api/users/${id}`)
       .then(res => {
-        dispatch({ type: DELETE_USERS_SUCCESS, payload: res.data });
+        dispatch({ type: DELETE_USERS_SUCCESS });
       })
       .catch(err => {
         dispatch({ type: DELETE_USERS_ERROR, payload: err.response });
