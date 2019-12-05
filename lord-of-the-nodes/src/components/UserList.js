@@ -1,6 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteUser } from '../actions/userActions';
 
-function UserList({ users, deleteUser, editUser }) {
+function UserList({ editingUser }) {
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
+
+  console.log(users)
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    dispatch(deleteUser(e.target.value))
+  }
+
   return (
     <>
        {users.map((user, index) => {
@@ -11,10 +23,10 @@ function UserList({ users, deleteUser, editUser }) {
             <h4>Bio: {user.bio}</h4>
             <h4>ID: {user.id}</h4>
             <div className='btnContainer'>
-              <button className='deleteBtn' onClick={() => deleteUser(user.id)}>
+              <button className='deleteBtn' onClick={() => handleDelete(user.id)}>
                 Delete
               </button>
-              <button className='updateBtn' onClick={() => editUser(user.id, user)}>
+              <button className='updateBtn' onClick={() => editingUser(user)}>
                 Update
               </button>
             </div>
