@@ -45,7 +45,8 @@ export function deleteUser(id) {
     axios
       .delete(`http://127.0.0.1:8080/api/users/${id}`)
       .then(res => {
-        dispatch({ type: DELETE_USERS_SUCCESS });
+        console.log(res.data.id)
+        dispatch({ type: DELETE_USERS_SUCCESS, payload: res.data });
       })
       .catch(err => {
         dispatch({ type: DELETE_USERS_ERROR, payload: err.response });
@@ -56,7 +57,7 @@ export function deleteUser(id) {
 export function editUser(user, id) {
   return dispatch => {
     axios
-    .put(`http://127.0.0.1:8080/api/users/${user.id}`, user)
+    .put(`http://127.0.0.1:8080/api/users/${id}`, user)
     .then(res => {
       console.log(res.data)
       dispatch({ type: PUT_USERS_SUCCESS, payload: res.data })

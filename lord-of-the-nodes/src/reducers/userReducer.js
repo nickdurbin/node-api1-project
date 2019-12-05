@@ -63,6 +63,7 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: false,
+        users: state.users.filter(user => user.id !== action.payload.id)
       }
     case DELETE_USERS_ERROR:
       return {

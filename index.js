@@ -41,14 +41,18 @@ server.get('/api/users/:id', (req, res) => {
 
 // DELETE REQUESTS
 server.delete('/api/users/:id', (req, res) => {
-  database.remove(req.params.id)
+  database.findById(req.params.id)
     .then(data => {
-      return data !== 0
-        ? res.status(200).json({ message: "Success!" })
-        : res.status(404).json({
-          message: "The user with the specified ID does not exist."
+      if (!data) {
+        res.status(404).json({ message: "The user with the specified ID does not exist."
         })
-      })
+      } else {
+      database.remove(req.params.id)
+        .then(i => {
+          res.status(200).json(data)
+        })
+      }
+    })
     .catch(() => {
       return res.status(500).json({
         error: "The user could not be removed."
