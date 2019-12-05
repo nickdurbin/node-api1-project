@@ -1,24 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import UserList from './UserList';
 import { createUser, editUser } from '../actions/userActions';
 
-function UserForm({ users, setUsers }) {
+function UserForm({ users, setUsers, editing, setEditing, userToEdit, setUserToEdit }) {
   const dispatch = useDispatch()
-  const [editing, setEditing] = useState(false)
-  const [userToEdit, setUserToEdit] = useState({
-    name: '',
-    bio: ''
-  })
+ 
   const [formValues, setFormValues] = useState({
     name: '',
     bio: ''
   })
-
-  const editingUser = user => {
-    setEditing(true);
-    setUserToEdit(user);
-  };
 
   const handleChange = e => {
     setFormValues({
@@ -81,7 +71,6 @@ function UserForm({ users, setUsers }) {
         <button className="formButton" type="submit">Submit!</button>
       </form>
     )}
-      <UserList editingUser={editingUser} />
     </div>
   );
 }
