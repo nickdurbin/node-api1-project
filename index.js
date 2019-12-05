@@ -63,7 +63,7 @@ server.put('/api/users/:id', (req, res) => {
       error: "Please provide name and bio for the user."
     })
   }
-  database.update(req.body)
+  database.update(req.params.id, req.body)
     .then(data => {
       return data !== 0
       ? res.status(201).json({ ...data, ...req.body })
