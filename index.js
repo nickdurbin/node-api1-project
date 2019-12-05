@@ -58,7 +58,7 @@ server.delete('/api/users/:id', (req, res) => {
 
 // UPDATE REQUESTS
 server.put('/api/users/:id', (req, res) => {
-  if (!req.body.name || req.body.bio) {
+  if (!req.body.name || !req.body.bio) {
     return res.status(400).json({
       error: "Please provide name and bio for the user."
     })
@@ -66,7 +66,7 @@ server.put('/api/users/:id', (req, res) => {
   database.update(req.body)
     .then(data => {
       return data !== 0
-      ? res.status(200).json({ ...data, ...req.body })
+      ? res.status(201).json({ ...data, ...req.body })
       : res.status(404).json({
         message: "The user with the specified ID does not exist."
       })
@@ -85,6 +85,7 @@ server.post('/api/users', (req, res) => {
       error: "Please provide name and bio of the user."
     })
   }
+  
   database.insert(req.body)
     .then(data => {
       return res.status(201).json({ ...data, ...req.body})
