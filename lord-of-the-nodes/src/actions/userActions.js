@@ -53,11 +53,12 @@ export function deleteUser(id) {
   };
 }
 
-export function editUser(user) {
+export function editUser(user, id) {
   return dispatch => {
     axios
     .put(`http://127.0.0.1:8080/api/users/${user.id}`, user)
     .then(res => {
+      console.log(res.data)
       dispatch({ type: PUT_USERS_SUCCESS, payload: res.data })
     })
     .catch(err => {
