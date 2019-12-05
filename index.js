@@ -14,7 +14,7 @@ server.get('/', (req, res) => {
 server.get('/api/users', (req, res) => {
   database.find()
     .then(data => {
-      res.status(200).json(data)
+      return res.status(200).json(data)
     })
     .catch(() => {
       return res.status(500).json({
@@ -60,7 +60,7 @@ server.delete('/api/users/:id', (req, res) => {
 server.put('/api/users/:id', (req, res) => {
   if (!req.body.name || req.body.bio) {
     return res.status(400).json({
-      error: "Okease provide name and bio for the user."
+      error: "Please provide name and bio for the user."
     })
   }
   database.update(req.body)
@@ -87,7 +87,7 @@ server.post('/api/users', (req, res) => {
   }
   database.insert(req.body)
     .then(data => {
-      res.status(201).json({ ...data, ...req.body})
+      return res.status(201).json({ ...data, ...req.body})
     })
     .catch(() => {
       return res.status(500).json({
