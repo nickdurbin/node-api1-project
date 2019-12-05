@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUser, editUser } from '../actions/userActions';
 
-function UserForm({ editing, setEditing, userToEdit, setUserToEdit, setUpdating, updating }) {
+function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
   const dispatch = useDispatch()
  
   const [formValues, setFormValues] = useState({
@@ -20,7 +20,6 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, setUpdating,
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(createUser(formValues))
-    setUpdating(!updating)
     resetForm()
   }
     
@@ -41,20 +40,20 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, setUpdating,
     <div>
      {editing && (
         <form>
-            <h1>Update User</h1>
-            <input 
-              onChange={e => setUserToEdit({ userToEdit, name: e.target.value })}
-              placeholder={userToEdit.name}
-              value={userToEdit.name}
-              required
-            />
+          <h1>Update User</h1>
+          <input 
+            onChange={e => setUserToEdit({ userToEdit, name: e.target.value })}
+            placeholder={userToEdit.name}
+            value={userToEdit.name}
+            required
+          />
 
-            <input
-              onChange={e => setUserToEdit({ userToEdit, bio: e.target.value })}
-              placeholder={userToEdit.bio}
-              value={userToEdit.bio}
-              required
-            />
+          <input
+            onChange={e => setUserToEdit({ userToEdit, bio: e.target.value })}
+            placeholder={userToEdit.bio}
+            value={userToEdit.bio}
+            required
+          />
           <div className="btnContainer">
             <button type="submit" onClick={() => handleEdit(userToEdit.id, userToEdit)}>Save</button>
             <button onClick={() => setEditing(false)}>Cancel</button>

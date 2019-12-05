@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { getUsers } from './actions/userActions';
 import UserForm from './components/UserForm';
 import UserList from './components/UserList';
-import { withRouter } from 'react-router-dom';
 
 function App() {
   const [editing, setEditing] = useState(false)
@@ -30,4 +29,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;

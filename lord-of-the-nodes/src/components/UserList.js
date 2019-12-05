@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser } from '../actions/userActions';
 
-function UserList({ editingUser, setUpdating, updating }) {
+function UserList({ editingUser }) {
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
 
@@ -11,7 +11,6 @@ function UserList({ editingUser, setUpdating, updating }) {
   const handleDelete = (e) => {
     e.preventDefault()
     dispatch(deleteUser(e.target.value))
-    setUpdating(!updating)
   }
 
   return (
