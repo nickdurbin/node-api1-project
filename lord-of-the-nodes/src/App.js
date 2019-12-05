@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="mainContent">
-      <UserForm editing={editing} setEditing={setEditing} userToEdit={userToEdit} setUserToEdit={setUserToEdit}/>
+      <UserForm editing={editing} setEditing={setEditing} userToEdit={userToEdit} setUserToEdit={setUserToEdit} />
       <UserList editingUser={editingUser} />
     </div>
   );

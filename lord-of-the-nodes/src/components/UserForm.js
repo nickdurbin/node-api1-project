@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUser, editUser } from '../actions/userActions';
 
-function UserForm({ users, setUsers, editing, setEditing, userToEdit, setUserToEdit }) {
+function UserForm({ editing, setEditing, userToEdit, setUserToEdit, setUpdating, updating }) {
   const dispatch = useDispatch()
  
   const [formValues, setFormValues] = useState({
@@ -20,6 +20,7 @@ function UserForm({ users, setUsers, editing, setEditing, userToEdit, setUserToE
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(createUser(formValues))
+    setUpdating(!updating)
     resetForm()
   }
     
