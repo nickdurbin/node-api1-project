@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import UserList from './UserList';
-import { createUser, deleteUser, editUser } from '../actions/userActions';
+import { createUser, editUser } from '../actions/userActions';
 
 function UserForm({ users, setUsers }) {
   const dispatch = useDispatch()
@@ -81,7 +81,7 @@ function UserForm({ users, setUsers }) {
         <button className="formButton" type="submit">Submit!</button>
       </form>
     )}
-      <UserList editingUser={editingUser} deleteUser={deleteUser} users={users}/>
+      <UserList editingUser={editingUser} />
     </div>
   );
 }
