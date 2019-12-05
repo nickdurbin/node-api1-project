@@ -11,6 +11,10 @@ exports.seed = function(knex) {
           name: 'Frodo Baggins',
           bio: 'The ring bearer',
         },
+        {
+          name: 'Bilbo Baggins',
+          bio: 'Storyteller. Adventure seeker. Old.',
+        },
       ]);
     });
 };
