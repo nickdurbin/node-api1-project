@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import UserList from './UserList';
-import axios from 'axios';
+import { createUser, deleteUser, editUser } from '../actions/userActions';
 
 function UserForm({ users, setUsers }) {
+  const dispatch = useDispatch()
   const [editing, setEditing] = useState(false)
   const [userToEdit, setUserToEdit] = useState({
-    id: '',
     name: '',
     bio: ''
   })
@@ -14,7 +15,7 @@ function UserForm({ users, setUsers }) {
     bio: ''
   })
 
-  const editUser = user => {
+  const editingUser = user => {
     setEditing(true);
     setUserToEdit(user);
   };
@@ -28,42 +29,14 @@ function UserForm({ users, setUsers }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    axios
-    .post('http://127.0.0.1:8080/api/users', formValues)
-    .then(res => {
-      console.log(res.data, 'User successfully created!')
-      return setUsers(res.data)
-    })
-    .catch(err => {
-      console.log(err.response, 'User not created.')
-    })
+    dispatch(createUser(formValues))
     resetForm()
   }
-
-  const deleteUser = id => {
-    if (window.confirm('Are you sure you want to delete user?'))
-    axios
-      .delete(`http://127.0.0.1:8080/api/users/${id}`)
-      .then(res => {
-        console.log(res.data, 'User successfully deleted.')
-        return setUsers(res.data)
-      })
-      .catch(err => {
-        console.log(err.response, 'User still here.')
-      })
-  }
-
-  const saveEdit = e => {
+    
+  const handleEdit = e => {
     e.preventDefault()
-    axios
-      .put(`http://127.0.0.1:8080/api/users/${userToEdit.id}`, userToEdit)
-			.then(result => {
-        setEditing(false)
-        console.log('User was edited!')
-			})
-			.catch(error => {
-				console.log(error)
-			})
+    dispatch(editUser(userToEdit.id, userToEdit))
+    setEditing(false)
 	}
 
   const resetForm = () => {
@@ -76,21 +49,23 @@ function UserForm({ users, setUsers }) {
   return (
     <div>
      {editing && (
-        <form onSubmit={saveEdit}>
+        <form>
             <h1>Update User</h1>
             <input 
               onChange={e => setUserToEdit({ userToEdit, name: e.target.value })}
+              placeholder={userToEdit.name}
               value={userToEdit.name}
               required
             />
 
             <input
-              onChange={e =>  setUserToEdit({ userToEdit, bio: e.target.value })}
+              onChange={e => setUserToEdit({ userToEdit, bio: e.target.value })}
+              placeholder={userToEdit.bio}
               value={userToEdit.bio}
               required
             />
           <div className="btnContainer">
-            <button type="submit">Save</button>
+            <button type="submit" onClick={() => handleEdit(userToEdit.id, userToEdit)}>Save</button>
             <button onClick={() => setEditing(false)}>Cancel</button>
           </div>
         </form>
@@ -106,7 +81,7 @@ function UserForm({ users, setUsers }) {
         <button className="formButton" type="submit">Submit!</button>
       </form>
     )}
-      <UserList editUser={editUser} deleteUser={deleteUser} users={users}/>
+      <UserList editingUser={editingUser} deleteUser={deleteUser} users={users}/>
     </div>
   );
 }
