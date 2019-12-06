@@ -76,7 +76,7 @@ server.put('/api/users/:id', (req, res) => {
         message: "The user with the specified ID does not exist."
     })
   })
-    .then(data => database.findById(req.params.id))
+    .then(() => database.findById(req.params.id))
     .then(data => res.status(201).json({ ...data, ...req.body }))
     .catch(err => {
       return res.status(500).json({
