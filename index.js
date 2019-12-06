@@ -67,15 +67,18 @@ server.put('/api/users/:id', (req, res) => {
       error: "Please provide name and bio for the user."
     })
   }
-  database.update(req.params.id, req.body)
-    .then(data => {
-      return data !== 0
-      ? res.status(201).json({ ...data, ...req.body })
-      : res.status(404).json({
+  database.findById(req.params.id)
+    .then(user => {
+      if (user) {
+        return database.update(req.params.id, req.body)
+      }
+      res.status(404).json({
         message: "The user with the specified ID does not exist."
-      })
     })
-    .catch(() => {
+  })
+    .then(data => database.findById(req.params.id))
+    .then(data => res.status(201).json({ ...data, ...req.body }))
+    .catch(err => {
       return res.status(500).json({
         error: "The user information could not be modified."
       })
