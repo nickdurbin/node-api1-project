@@ -70,7 +70,7 @@ server.put('/api/users/:id', (req, res) => {
   database.findById(req.params.id)
     .then(user => {
       if (user) {
-        return database.update(req.params.id, req.body)
+        return database.update(req.params.id, { name: req.body.name, bio: req.body.bio })
       }
       res.status(404).json({
         message: "The user with the specified ID does not exist."

@@ -54,10 +54,10 @@ export function deleteUser(id) {
   };
 }
 
-export function editUser(user, id) {
+export function editUser(user) {
   return dispatch => {
     axios
-    .put(`http://127.0.0.1:8080/api/users/${id}`, user)
+    .put(`http://127.0.0.1:8080/api/users/${user.id}`, { bio: user.bio, name: user.name })
     .then(res => {
       console.log(res.data)
       dispatch({ type: PUT_USERS_SUCCESS, payload: res.data })

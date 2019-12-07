@@ -23,10 +23,10 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
     resetForm()
   }
     
-  const handleEdit = e => {
+  const handleEdit = (e, user) => {
     e.preventDefault()
-    console.log(userToEdit.id, userToEdit)
-    dispatch(editUser(userToEdit.id, userToEdit))
+    console.log(user.id, user)
+    dispatch(editUser(user))
     setEditing(false)
 	}
 
@@ -43,20 +43,20 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
         <form>
           <h1>Update User</h1>
           <input 
-            onChange={e => setUserToEdit({ userToEdit, name: e.target.value })}
+            onChange={e => setUserToEdit({ ...userToEdit, name: e.target.value })}
             placeholder={userToEdit.name}
             value={userToEdit.name}
             required
           />
 
           <input
-            onChange={e => setUserToEdit({ userToEdit, bio: e.target.value })}
+            onChange={e => setUserToEdit({ ...userToEdit, bio: e.target.value })}
             placeholder={userToEdit.bio}
             value={userToEdit.bio}
             required
           />
           <div className="btnContainer">
-            <button type="submit" onClick={() => handleEdit(userToEdit.id, userToEdit)}>Save</button>
+            <button type="submit" onClick={(e) => handleEdit(e, userToEdit)}>Save</button>
             <button onClick={() => setEditing(false)}>Cancel</button>
           </div>
         </form>
