@@ -24,9 +24,9 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
   }
     
   const handleEdit = e => {
-    e.preventDefault()
     console.log(userToEdit.id, userToEdit)
     dispatch(editUser(userToEdit.id, userToEdit))
+    console.log("I am here now.")
     setEditing(false)
 	}
 

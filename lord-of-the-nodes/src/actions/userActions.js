@@ -55,6 +55,7 @@ export function deleteUser(id) {
 }
 
 export function editUser(user, id) {
+  console.log("I am in the actions.")
   return dispatch => {
     axios
     .put(`http://127.0.0.1:8080/api/users/${id}`, user)

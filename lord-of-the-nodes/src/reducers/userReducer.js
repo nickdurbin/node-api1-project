@@ -77,6 +77,7 @@ export function userReducer(state = initialState, action) {
         isLoading: true
       }
     case PUT_USERS_SUCCESS:
+      console.log("I am in the reducer.")
       return {
         ...state,
           isLoading: false,
