@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 const cors = require('cors')
 const database = require('./data/db')
@@ -104,7 +105,7 @@ server.post('/api/users', (req, res) => {
     })
 })
 
-const port = 8080
+const port = process.env.PORT || 8080
 const host = "127.0.0.1" // another way to say "localhost"
 
 server.listen(port, host, () => {
