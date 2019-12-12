@@ -105,9 +105,8 @@ server.post('/api/users', (req, res) => {
     })
 })
 
-const port = process.env.PORT;
-const host = "127.0.0.1" // another way to say "localhost"
+const port = process.env.PORT || 8080;
 
-server.listen(port, host, () => {
-  console.log(`Server running at http://${host}:${port}`)
+server.listen(port, () => {
+  console.log(`Server running at ${port}`)
 })
