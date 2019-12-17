@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser } from '../actions/userActions';
 
-function UserList({ editingUser }) {
+function UserList({ editingUser, image }) {
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
 
@@ -18,6 +18,9 @@ function UserList({ editingUser }) {
       {users.map((user, index) => {
         return (
           <div className='userContainer' key={user.id} index={index}>
+            <div className="imageContainer">
+              <img src={image} alt="Avatar of user." />
+            </div>
             <h1>Character</h1>
             <h2>Name: {user.name}</h2>
             <h4>Bio: {user.bio}</h4>
