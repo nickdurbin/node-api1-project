@@ -19,7 +19,7 @@ export const PUT_USERS_ERROR = 'PUT_USERS_ERROR'
 export const getUsers = () => dispatch => {
   dispatch({ type: GET_USERS_REQUEST })
   axios
-    .get(`http://127.0.0.1:8080/api/users`)
+    .get(`http://127.0.0.1:4000/api/users`)
     .then(res =>
       dispatch({ type: GET_USERS_SUCCESS, payload: res.data })
     )
@@ -29,7 +29,7 @@ export const getUsers = () => dispatch => {
 export function createUser(user) {
   return dispatch => {
     axios
-      .post("http://127.0.0.1:8080/api/users", user)
+      .post("http://127.0.0.1:4000/api/users", user)
       .then(res => {
         dispatch({ type: POST_USERS_SUCCESS, payload: res.data });
       })
@@ -43,7 +43,7 @@ export function deleteUser(id) {
   return dispatch => {
     if (window.confirm('Are you sure you want to delete user?'))
     axios
-      .delete(`http://127.0.0.1:8080/api/users/${id}`)
+      .delete(`http://127.0.0.1:4000/api/users/${id}`)
       .then(res => {
         console.log(res.data.id)
         dispatch({ type: DELETE_USERS_SUCCESS, payload: res.data });
@@ -57,7 +57,7 @@ export function deleteUser(id) {
 export function editUser(user) {
   return dispatch => {
     axios
-    .put(`http://127.0.0.1:8080/api/users/${user.id}`, { bio: user.bio, name: user.name })
+    .put(`http://127.0.0.1:4000/api/users/${user.id}`, { bio: user.bio, name: user.name })
     .then(res => {
       console.log(res.data)
       dispatch({ type: PUT_USERS_SUCCESS, payload: res.data })
