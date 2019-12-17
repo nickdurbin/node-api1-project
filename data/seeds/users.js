@@ -6,17 +6,17 @@ exports.seed = function(knex) {
         {
           name: 'Samwise Gamgee',
           bio: 'Gardener and poet. Married to Rose Cotton',
-          image: ''
+          file: ''
         },
         {
           name: 'Frodo Baggins',
           bio: 'The ring bearer',
-          image: ''
+          file: ''
         },
         {
           name: 'Bilbo Baggins',
           bio: 'Storyteller. Adventure seeker. Old.',
-          image: ''
+          file: ''
         },
       ]);
     });
