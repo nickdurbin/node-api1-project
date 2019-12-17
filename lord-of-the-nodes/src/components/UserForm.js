@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUser, editUser } from '../actions/userActions';
 
-function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
+function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setImage }) {
   const dispatch = useDispatch()
  
   const [formValues, setFormValues] = useState({
@@ -15,6 +15,22 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
       ...formValues,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleImage = async e => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', "webapi1")
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/ndurbin/image/upload', {
+        method: 'POST',
+        body: data
+      }
+    )
+    const file = await res.json()
+
+    setImage(file.secure_url)
   }
 
   const handleSubmit = e => {
@@ -68,6 +84,8 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
         <input type="text" name="name" placeholder="Name" value={formValues.name} required onChange={handleChange} />
 
         <input type="text" name="bio" placeholder="Bio" value={formValues.bio} required onChange={handleChange} />
+
+        <input type="file" placeholder='Upload an Image' name="file" onChange={handleImage} />
 
         <button className="formButton" type="submit">Submit!</button>
       </form>
