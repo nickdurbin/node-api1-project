@@ -38,7 +38,7 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setIm
   const handleSubmit = e => {
     e.preventDefault()
     console.log(formValues)
-    dispatch(createUser(formValues))
+    dispatch(createUser(formValues + image))
     resetForm()
   }
     
