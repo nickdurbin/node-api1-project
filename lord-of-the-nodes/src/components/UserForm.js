@@ -4,10 +4,12 @@ import { createUser, editUser } from '../actions/userActions';
 
 function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setImage }) {
   const dispatch = useDispatch()
+  console.log(image)
  
   const [formValues, setFormValues] = useState({
     name: '',
-    bio: ''
+    bio: '',
+    file: image
   })
 
   const handleChange = e => {
@@ -35,6 +37,7 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setIm
 
   const handleSubmit = e => {
     e.preventDefault()
+    console.log(formValues)
     dispatch(createUser(formValues))
     resetForm()
   }
@@ -85,7 +88,7 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setIm
 
         <input type="text" name="bio" placeholder="Bio" value={formValues.bio} required onChange={handleChange} />
 
-        <input type="file" placeholder='Upload an Image' name="file" onChange={handleImage} />
+        <input type="file" placeholder='Upload an Image' name="file" value={formValues.file} onChange={handleImage} />
 
         <button className="formButton" type="submit">Submit!</button>
       </form>
