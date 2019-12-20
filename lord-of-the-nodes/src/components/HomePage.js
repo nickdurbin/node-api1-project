@@ -6,7 +6,6 @@ import UserList from './UserList';
 
 function HomePage() {
   const [editing, setEditing] = useState(false)
-  const [image, setImage] = useState('')
   const [userToEdit, setUserToEdit] = useState({
     name: '',
     bio: ''
@@ -24,8 +23,8 @@ function HomePage() {
 
   return (
     <>
-      <UserForm editing={editing} setEditing={setEditing} userToEdit={userToEdit} setUserToEdit={setUserToEdit} image={image} setImage={setImage}/>
-      <UserList editingUser={editingUser} image={image} />
+      <UserForm editing={editing} setEditing={setEditing} userToEdit={userToEdit} setUserToEdit={setUserToEdit} />
+      <UserList editingUser={editingUser} />
     </>
   )
 }

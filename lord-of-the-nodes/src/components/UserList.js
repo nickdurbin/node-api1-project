@@ -19,7 +19,7 @@ function UserList({ editingUser, image }) {
         return (
           <div className='userContainer' key={user.id} index={index}>
             <div className="imageContainer">
-              <img src={image} alt="Avatar of user." />
+              <img src={user.file} alt="Avatar of user." />
             </div>
             <h1>Character</h1>
             <h2>Name: {user.name}</h2>

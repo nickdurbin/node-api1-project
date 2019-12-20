@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className="mainContent">
-      <Route exat path='/' component={HomePage} />
+      <Route exact path='/' component={HomePage} />
     </div>
   );
 }

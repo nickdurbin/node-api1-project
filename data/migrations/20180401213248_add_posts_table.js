@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
 
     users.string('name', 255).notNullable();
     users.text('bio');
-    users.text('file', 255).notNullable();
+    users.text('file', 255)
     users.timestamps(true, true);
   });
 };

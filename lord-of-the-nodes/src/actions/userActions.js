@@ -26,10 +26,10 @@ export const getUsers = () => dispatch => {
     .catch(err => dispatch({ type: GET_USERS_ERROR, payload: err.response }))
 }
 
-export function createUser(user, image) {
+export function createUser(user) {
   return dispatch => {
     axios
-      .post("http://127.0.0.1:4000/api/users", user, image)
+      .post("http://127.0.0.1:4000/api/users", user)
       .then(res => {
         dispatch({ type: POST_USERS_SUCCESS, payload: res.data });
       })

@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUser, editUser } from '../actions/userActions';
 
-function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setImage }) {
+function UserForm({ editing, setEditing, userToEdit, setUserToEdit }) {
   const dispatch = useDispatch()
-  console.log(image)
  
   const [formValues, setFormValues] = useState({
     name: '',
     bio: '',
-    file: image
+    file: ''
   })
 
   const handleChange = e => {
@@ -32,13 +31,13 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setIm
     )
     const file = await res.json()
 
-    setImage(file.secure_url)
+    setFormValues({ ...formValues, file: file.secure_url })
   }
 
   const handleSubmit = e => {
     e.preventDefault()
     console.log(formValues)
-    dispatch(createUser(formValues + image))
+    dispatch(createUser(formValues))
     resetForm()
   }
     
@@ -88,7 +87,7 @@ function UserForm({ editing, setEditing, userToEdit, setUserToEdit, image, setIm
 
         <input type="text" name="bio" placeholder="Bio" value={formValues.bio} required onChange={handleChange} />
 
-        <input type="file" placeholder='Upload an Image' name="file" value={formValues.file} onChange={handleImage} />
+        <input type="file" placeholder='Upload an Image' name="file" onChange={handleImage} />
 
         <button className="formButton" type="submit">Submit!</button>
       </form>
